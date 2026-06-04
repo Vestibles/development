@@ -65,6 +65,16 @@ export default function SettingsPage() {
 
       <ExportPanel data={data} scope="all" title="Export everything" />
 
+      <Card className="space-y-2">
+        <h2 className="text-sm font-semibold">Install on your device</h2>
+        <p className="text-sm text-[var(--color-muted)]">
+          On mobile, use your browser menu: <strong>Add to Home Screen</strong>{" "}
+          (iPhone) or <strong>Install app</strong> (Android/Chrome). When hosted
+          on Vercel, the app can be installed like a native app and works with
+          your saved data offline in demo mode.
+        </p>
+      </Card>
+
       <Card>
         <p className="text-sm text-[var(--color-muted)]">
           Storage: {usingSupabase ? "Supabase cloud database" : "Browser local storage (demo mode)"}
