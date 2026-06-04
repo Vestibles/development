@@ -1,0 +1,242 @@
+"use client";
+
+import { useState } from "react";
+import { Plus } from "lucide-react";
+import { IconDelete } from "@/components/ui/IconDelete";
+import { ExportPanel } from "@/components/export/ExportPanel";
+import { PageHeader } from "@/components/ui/PageHeader";
+import { Card } from "@/components/ui/Card";
+import { Button } from "@/components/ui/Button";
+import { Field } from "@/components/ui/Field";
+import { useEvent } from "@/lib/context/EventContext";
+import {
+  formatCurrency,
+  formatPercent,
+  stallMarginPercent,
+  stallProfit,
+  stallRevenue,
+} from "@/lib/calculations";
+
+export default function StallsPage() {
+  const { data, addStall, updateStall, removeStall, addExpense, updateExpense, removeExpense } =
+    useEvent();
+  const [showForm, setShowForm] = useState(false);
+  const [name, setName] = useState("");
+  const [itemCost, setItemCost] = useState("1");
+  const [sellingPrice, setSellingPrice] = useState("2.5");
+  const [quantity, setQuantity] = useState("50");
+
+  function handleAdd(e: React.FormEvent) {
+    e.preventDefault();
+    addStall({
+      name: name.trim() || "New stall",
+      item_cost: parseFloat(itemCost) || 0,
+      selling_price: parseFloat(sellingPrice) || 0,
+      quantity: parseInt(quantity, 10) || 0,
+    });
+    setName("");
+    setShowForm(false);
+  }
+
+  return (
+    <div className="space-y-5">
+      <PageHeader
+        title="Stalls"
+        subtitle="Plan items, prices, and projected profit"
+      />
+
+      <ExportPanel data={data} scope="stalls" variant="compact" />
+
+      <Button fullWidth onClick={() => setShowForm(!showForm)}>
+        <Plus className="h-5 w-5" aria-hidden />
+        Add stall
+      </Button>
+
+      {showForm ? (
+        <Card>
+          <form onSubmit={handleAdd} className="space-y-3">
+            <Field label="Stall name" value={name} onChange={(e) => setName(e.target.value)} required />
+            <div className="grid grid-cols-2 gap-3">
+              <Field
+                label="Cost per item (£)"
+                type="number"
+                step="0.01"
+                min={0}
+                value={itemCost}
+                onChange={(e) => setItemCost(e.target.value)}
+              />
+              <Field
+                label="Selling price (£)"
+                type="number"
+                step="0.01"
+                min={0}
+                value={sellingPrice}
+                onChange={(e) => setSellingPrice(e.target.value)}
+              />
+            </div>
+            <Field
+              label="Quantity planned"
+              type="number"
+              min={0}
+              value={quantity}
+              onChange={(e) => setQuantity(e.target.value)}
+            />
+            <Button type="submit" fullWidth>
+              Save stall
+            </Button>
+          </form>
+        </Card>
+      ) : null}
+
+      <div className="space-y-3">
+        {data.stalls.map((stall) => {
+          const margin = stallMarginPercent(stall.selling_price, stall.item_cost);
+          const profit = stallProfit(stall);
+          const revenue = stallRevenue(stall);
+          return (
+            <Card key={stall.id}>
+              <div className="mb-2 flex justify-end">
+                <IconDelete
+                  itemName={stall.name}
+                  onDelete={() => removeStall(stall.id)}
+                />
+              </div>
+              <Field
+                label="Stall name"
+                value={stall.name}
+                onChange={(e) =>
+                  updateStall(stall.id, { name: e.target.value })
+                }
+              />
+              <div className="mt-2 grid grid-cols-2 gap-2 text-sm">
+                <Field
+                  label="Cost (£)"
+                  type="number"
+                  step="0.01"
+                  value={stall.item_cost}
+                  onChange={(e) =>
+                    updateStall(stall.id, { item_cost: parseFloat(e.target.value) || 0 })
+                  }
+                />
+                <Field
+                  label="Price (£)"
+                  type="number"
+                  step="0.01"
+                  value={stall.selling_price}
+                  onChange={(e) =>
+                    updateStall(stall.id, {
+                      selling_price: parseFloat(e.target.value) || 0,
+                    })
+                  }
+                />
+                <Field
+                  label="Quantity"
+                  type="number"
+                  min={0}
+                  value={stall.quantity}
+                  onChange={(e) =>
+                    updateStall(stall.id, {
+                      quantity: parseInt(e.target.value, 10) || 0,
+                    })
+                  }
+                />
+              </div>
+              <div className="mt-2">
+                <Field
+                  label="Notes"
+                  value={stall.notes ?? ""}
+                  onChange={(e) =>
+                    updateStall(stall.id, {
+                      notes: e.target.value || null,
+                    })
+                  }
+                />
+              </div>
+              <dl className="mt-3 grid grid-cols-3 gap-2 rounded-xl bg-[var(--color-cream)] p-3 text-center text-sm">
+                <div>
+                  <dt className="text-[var(--color-muted)]">Revenue</dt>
+                  <dd className="font-semibold">{formatCurrency(revenue)}</dd>
+                </div>
+                <div>
+                  <dt className="text-[var(--color-muted)]">Profit</dt>
+                  <dd className="font-semibold text-[var(--color-sage-dark)]">
+                    {formatCurrency(profit)}
+                  </dd>
+                </div>
+                <div>
+                  <dt className="text-[var(--color-muted)]">Margin</dt>
+                  <dd className="font-semibold">{formatPercent(margin)}</dd>
+                </div>
+              </dl>
+            </Card>
+          );
+        })}
+      </div>
+
+      <section className="space-y-3">
+        <div className="flex items-center justify-between gap-2">
+          <h2 className="text-lg font-semibold">Event expenses</h2>
+        </div>
+        <ExportPanel data={data} scope="expenses" variant="compact" />
+        {data.expenses.map((exp) => (
+          <Card key={exp.id} padding="sm">
+            <div className="mb-2 flex justify-end">
+              <IconDelete
+                itemName={exp.description}
+                onDelete={() => removeExpense(exp.id)}
+              />
+            </div>
+            <Field
+              label="Description"
+              value={exp.description}
+              onChange={(e) =>
+                updateExpense(exp.id, { description: e.target.value })
+              }
+            />
+            <div className="mt-2">
+              <Field
+                label="Category"
+                value={exp.category}
+                onChange={(e) =>
+                  updateExpense(exp.id, { category: e.target.value })
+                }
+              />
+            </div>
+            <div className="mt-2 grid grid-cols-2 gap-2">
+              <Field
+                label="Budget"
+                type="number"
+                value={exp.budgeted}
+                onChange={(e) =>
+                  updateExpense(exp.id, { budgeted: parseFloat(e.target.value) || 0 })
+                }
+              />
+              <Field
+                label="Actual"
+                type="number"
+                value={exp.actual}
+                onChange={(e) =>
+                  updateExpense(exp.id, { actual: parseFloat(e.target.value) || 0 })
+                }
+              />
+            </div>
+          </Card>
+        ))}
+        <Button
+          variant="secondary"
+          fullWidth
+          onClick={() =>
+            addExpense({
+              category: "General",
+              description: "New expense",
+              budgeted: 0,
+              actual: 0,
+            })
+          }
+        >
+          <Plus className="h-5 w-5" /> Add expense
+        </Button>
+      </section>
+    </div>
+  );
+}
