@@ -1,16 +1,26 @@
 @import "tailwindcss";
 
 @theme {
-  --color-cream: #faf8f5;
-  --color-sage: #7c9a82;
-  --color-sage-dark: #5f7d65;
-  --color-lavender: #9b8bb4;
-  --color-sky: #7eb8d4;
-  --color-coral: #e8a598;
-  --color-ink: #2d3436;
-  --color-muted: #636e72;
+  /* Warm base */
+  --color-cream: #fff8f1;
+  --color-cream-deep: #ffedd5;
+  /* Primary — lively teal */
+  --color-sage: #2dd4bf;
+  --color-sage-dark: #0d9488;
+  /* Accents */
+  --color-lavender: #c4b5fd;
+  --color-lavender-dark: #7c3aed;
+  --color-sky: #38bdf8;
+  --color-sky-dark: #0284c7;
+  --color-coral: #fb7185;
+  --color-coral-dark: #e11d48;
+  --color-amber: #fbbf24;
+  --color-amber-dark: #d97706;
+  /* Text & surfaces */
+  --color-ink: #1e293b;
+  --color-muted: #64748b;
   --color-card: #ffffff;
-  --color-border: #e8e4df;
+  --color-border: #e2e8f0;
   --font-sans: "Segoe UI", system-ui, -apple-system, sans-serif;
 }
 
@@ -20,7 +30,13 @@ html {
 
 body {
   font-family: var(--font-sans);
-  background: var(--color-cream);
+  background: linear-gradient(
+    165deg,
+    var(--color-cream) 0%,
+    #f0fdfa 40%,
+    #fff7ed 100%
+  );
+  background-attachment: fixed;
   color: var(--color-ink);
   min-height: 100dvh;
 }

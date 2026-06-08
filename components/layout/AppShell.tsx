@@ -10,9 +10,9 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="mx-auto min-h-dvh max-w-lg pb-24">
-      <header className="sticky top-0 z-40 border-b border-[var(--color-border)] bg-[var(--color-cream)]/95 px-4 py-3 backdrop-blur-md">
+      <header className="sticky top-0 z-40 border-b border-[var(--color-border)]/80 bg-white/80 px-4 py-3 backdrop-blur-md">
         <div className="flex items-center gap-3">
-          <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[var(--color-sage)]/20 text-[var(--color-sage-dark)]">
+          <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-[var(--color-sage-dark)] to-[var(--color-sky-dark)] text-white shadow-md shadow-[var(--color-sage-dark)]/30">
             <Church className="h-6 w-6" aria-hidden />
           </div>
           <div className="min-w-0 flex-1">
@@ -31,11 +31,11 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             <Settings className="h-5 w-5" />
           </Link>
           {usingSupabase ? (
-            <span className="rounded-full bg-[var(--color-sky)]/20 px-2 py-1 text-[10px] font-medium text-[#4a8fad]">
+            <span className="rounded-full bg-[var(--color-sky)]/25 px-2 py-1 text-[10px] font-medium text-[var(--color-sky-dark)]">
               Cloud
             </span>
           ) : (
-            <span className="rounded-full bg-[var(--color-lavender)]/20 px-2 py-1 text-[10px] font-medium text-[#6b5b8a]">
+            <span className="rounded-full bg-[var(--color-lavender)]/30 px-2 py-1 text-[10px] font-medium text-[var(--color-lavender-dark)]">
               Demo
             </span>
           )}

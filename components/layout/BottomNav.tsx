@@ -27,7 +27,7 @@ export function BottomNav() {
 
   return (
     <nav
-      className="fixed bottom-0 left-0 right-0 z-50 border-t border-[var(--color-border)] bg-white/95 backdrop-blur-md safe-area-pb"
+      className="fixed bottom-0 left-0 right-0 z-50 border-t border-[var(--color-border)]/80 bg-white/90 backdrop-blur-md safe-area-pb"
       aria-label="Main navigation"
     >
       <ul className="mx-auto flex max-w-lg items-stretch justify-between gap-0 px-1 py-1">
@@ -40,7 +40,7 @@ export function BottomNav() {
                 href={href}
                 className={`flex min-h-[3.25rem] flex-col items-center justify-center gap-0.5 rounded-xl px-1 py-1 text-[10px] font-medium transition ${
                   active
-                    ? "bg-[var(--color-sage)]/15 text-[var(--color-sage-dark)]"
+                    ? "bg-gradient-to-t from-[var(--color-sage)]/25 to-[var(--color-sky)]/15 text-[var(--color-sage-dark)]"
                     : "text-[var(--color-muted)] hover:text-[var(--color-ink)]"
                 }`}
               >

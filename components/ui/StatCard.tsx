@@ -10,10 +10,10 @@ interface StatCardProps {
 }
 
 const accents = {
-  sage: "bg-[var(--color-sage)]/15 text-[var(--color-sage-dark)]",
-  sky: "bg-[var(--color-sky)]/20 text-[#4a8fad]",
-  lavender: "bg-[var(--color-lavender)]/20 text-[#6b5b8a]",
-  coral: "bg-[var(--color-coral)]/25 text-[#b07068]",
+  sage: "bg-[var(--color-sage)]/20 text-[var(--color-sage-dark)]",
+  sky: "bg-[var(--color-sky)]/25 text-[var(--color-sky-dark)]",
+  lavender: "bg-[var(--color-lavender)]/30 text-[var(--color-lavender-dark)]",
+  coral: "bg-[var(--color-coral)]/25 text-[var(--color-coral-dark)]",
 };
 
 export function StatCard({

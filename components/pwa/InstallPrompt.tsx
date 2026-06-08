@@ -72,8 +72,8 @@ export function InstallPrompt() {
       aria-label="Install app"
     >
       <div className="flex items-start gap-3">
-        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[var(--color-sage)]/20">
-          <Download className="h-5 w-5 text-[var(--color-sage-dark)]" />
+        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[var(--color-sage-dark)] to-[var(--color-sky-dark)] text-white shadow-sm">
+          <Download className="h-5 w-5" />
         </div>
         <div className="min-w-0 flex-1">
           <p className="font-semibold">Install Fun Day Planner</p>

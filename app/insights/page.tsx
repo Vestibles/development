@@ -44,7 +44,7 @@ export default function InsightsPage() {
       />
 
       <Card className="flex items-start gap-3 bg-[var(--color-lavender)]/10">
-        <Sparkles className="h-6 w-6 shrink-0 text-[#6b5b8a]" aria-hidden />
+        <Sparkles className="h-6 w-6 shrink-0 text-[var(--color-lavender-dark)]" aria-hidden />
         <p className="text-sm text-[var(--color-muted)]">
           Smart suggestions based on your stall margins, attendance estimate,
           and planned quantities. Review with your team before making changes.

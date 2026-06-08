@@ -30,7 +30,7 @@ export function RevenueChart({ summary }: RevenueChartProps) {
       <div className="h-52 w-full">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={data} margin={{ top: 8, right: 8, left: -16, bottom: 0 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#e8e4df" vertical={false} />
+            <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" vertical={false} />
             <XAxis dataKey="name" tick={{ fontSize: 12 }} axisLine={false} tickLine={false} />
             <YAxis
               tick={{ fontSize: 11 }}
@@ -42,10 +42,10 @@ export function RevenueChart({ summary }: RevenueChartProps) {
               formatter={(value: number) => [formatCurrency(value), "Amount"]}
               contentStyle={{
                 borderRadius: 12,
-                border: "1px solid #e8e4df",
+                border: "1px solid #e2e8f0",
               }}
             />
-            <Bar dataKey="value" fill="var(--color-sage)" radius={[8, 8, 0, 0]} />
+            <Bar dataKey="value" fill="var(--color-sage-dark)" radius={[8, 8, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
       </div>

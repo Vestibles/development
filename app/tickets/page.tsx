@@ -63,7 +63,7 @@ export default function TicketsPage() {
 
       <ExportPanel data={data} scope="tickets" variant="compact" />
 
-      <Card className="bg-[var(--color-sage)]/10 text-center">
+      <Card className="border-[var(--color-sage)]/30 bg-gradient-to-br from-[var(--color-sage)]/15 to-[var(--color-sky)]/10 text-center">
         <p className="text-sm text-[var(--color-muted)]">Grand total</p>
         <p className="text-3xl font-bold text-[var(--color-sage-dark)]">
           {formatCurrency(grandTotal)}

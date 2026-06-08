@@ -120,8 +120,8 @@ export default function SimulatorPage() {
         </dl>
       </Card>
 
-      <Card className="border-[var(--color-lavender)]/40 bg-[var(--color-lavender)]/10">
-        <p className="text-sm font-medium text-[#6b5b8a]">Suggested price (40% margin)</p>
+      <Card className="border-[var(--color-lavender)]/50 bg-[var(--color-lavender)]/15">
+        <p className="text-sm font-medium text-[var(--color-lavender-dark)]">Suggested price (40% margin)</p>
         <p className="mt-1 text-2xl font-bold">{formatCurrency(suggested)}</p>
         <p className="mt-2 text-xs text-[var(--color-muted)]">
           Based on your item cost. Round to a friendly price (e.g. £2.50).

@@ -17,7 +17,7 @@ interface ProfitChartProps {
   profit: number;
 }
 
-const COLORS = ["#7c9a82", "#e8a598", "#7eb8d4"];
+const COLORS = ["#0d9488", "#fb7185", "#38bdf8"];
 
 export function ProfitChart({ revenue, expenses, profit }: ProfitChartProps) {
   const data = [
