@@ -115,7 +115,23 @@ async function loadFromSupabase(): Promise<AppData | null> {
   };
 }
 
+function mapStallProduct(row: Record<string, unknown>) {
+  return {
+    id: String(row.id),
+    name: String(row.name),
+    item_cost: Number(row.item_cost),
+    selling_price: Number(row.selling_price),
+    quantity: Number(row.quantity),
+  };
+}
+
 function mapStall(row: Record<string, unknown>): Stall {
+  const products = Array.isArray(row.products)
+    ? row.products.map((p) =>
+        mapStallProduct(p as Record<string, unknown>)
+      )
+    : undefined;
+
   return {
     id: String(row.id),
     event_id: String(row.event_id),
@@ -124,6 +140,7 @@ function mapStall(row: Record<string, unknown>): Stall {
     selling_price: Number(row.selling_price),
     quantity: Number(row.quantity),
     notes: row.notes as string | null,
+    products,
   };
 }
 

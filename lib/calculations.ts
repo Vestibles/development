@@ -1,3 +1,4 @@
+import { getStallProducts } from "./stalls/products";
 import type {
   DashboardSummary,
   Expense,
@@ -20,26 +21,42 @@ export function stallMarginPercent(
 }
 
 export function stallRevenue(stall: Stall): number {
-  return stall.selling_price * stall.quantity;
+  return getStallProducts(stall).reduce(
+    (sum, p) => sum + p.selling_price * p.quantity,
+    0
+  );
 }
 
 export function stallTotalCost(stall: Stall): number {
-  return stall.item_cost * stall.quantity;
+  return getStallProducts(stall).reduce(
+    (sum, p) => sum + p.item_cost * p.quantity,
+    0
+  );
 }
 
 export function stallProfit(stall: Stall): number {
-  return stallUnitProfit(stall.selling_price, stall.item_cost) * stall.quantity;
+  return getStallProducts(stall).reduce(
+    (sum, p) =>
+      sum + stallUnitProfit(p.selling_price, p.item_cost) * p.quantity,
+    0
+  );
 }
 
 export function stallMetrics(stall: Stall): StallMetrics {
+  const revenue = stallRevenue(stall);
+  const cost = stallTotalCost(stall);
+  const profit = stallProfit(stall);
+  const units = getStallProducts(stall).reduce((sum, p) => sum + p.quantity, 0);
+  const marginPercent = revenue > 0 ? ((revenue - cost) / revenue) * 100 : 0;
+
   return {
     id: stall.id,
     name: stall.name,
-    revenue: stallRevenue(stall),
-    cost: stallTotalCost(stall),
-    profit: stallProfit(stall),
-    marginPercent: stallMarginPercent(stall.selling_price, stall.item_cost),
-    units: stall.quantity,
+    revenue,
+    cost,
+    profit,
+    marginPercent,
+    units,
   };
 }
 

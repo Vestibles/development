@@ -5,6 +5,14 @@ export interface Event {
   attendance_estimate: number;
 }
 
+export interface StallProduct {
+  id: string;
+  name: string;
+  item_cost: number;
+  selling_price: number;
+  quantity: number;
+}
+
 export interface Stall {
   id: string;
   event_id: string;
@@ -13,6 +21,7 @@ export interface Stall {
   selling_price: number;
   quantity: number;
   notes?: string | null;
+  products?: StallProduct[];
 }
 
 export interface Expense {

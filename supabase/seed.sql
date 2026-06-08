@@ -1,10 +1,10 @@
--- Sample seed for St Mary's Family Fun Day
+-- Sample seed for ZCCEW Family Fun Day
 -- Replace event UUID after first insert or use returned id
 
 insert into events (id, name, event_date, attendance_estimate)
 values (
   '00000000-0000-4000-8000-000000000001',
-  'St Mary''s Family Fun Day',
+  'ZCCEW Family Fun Day',
   '2026-06-14',
   350
 ) on conflict (id) do nothing;

@@ -38,6 +38,7 @@ export async function persistStall(stall: Stall): Promise<void> {
     selling_price: stall.selling_price,
     quantity: stall.quantity,
     notes: stall.notes ?? null,
+    products: stall.products ?? [],
   });
 }
 

@@ -8,7 +8,9 @@ import { PageHeader } from "@/components/ui/PageHeader";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { Field } from "@/components/ui/Field";
+import { StallProducts } from "@/components/stalls/StallProducts";
 import { useEvent } from "@/lib/context/EventContext";
+import { defaultProductForStall } from "@/lib/stalls/products";
 import {
   formatCurrency,
   formatPercent,
@@ -28,11 +30,22 @@ export default function StallsPage() {
 
   function handleAdd(e: React.FormEvent) {
     e.preventDefault();
+    const item_cost = parseFloat(itemCost) || 0;
+    const selling_price = parseFloat(sellingPrice) || 0;
+    const qty = parseInt(quantity, 10) || 0;
     addStall({
       name: name.trim() || "New stall",
-      item_cost: parseFloat(itemCost) || 0,
-      selling_price: parseFloat(sellingPrice) || 0,
-      quantity: parseInt(quantity, 10) || 0,
+      item_cost,
+      selling_price,
+      quantity: qty,
+      products: [
+        defaultProductForStall({
+          name: name.trim() || "Main item",
+          item_cost,
+          selling_price,
+          quantity: qty,
+        }),
+      ],
     });
     setName("");
     setShowForm(false);
@@ -108,39 +121,10 @@ export default function StallsPage() {
                   updateStall(stall.id, { name: e.target.value })
                 }
               />
-              <div className="mt-2 grid grid-cols-2 gap-2 text-sm">
-                <Field
-                  label="Cost (£)"
-                  type="number"
-                  step="0.01"
-                  value={stall.item_cost}
-                  onChange={(e) =>
-                    updateStall(stall.id, { item_cost: parseFloat(e.target.value) || 0 })
-                  }
-                />
-                <Field
-                  label="Price (£)"
-                  type="number"
-                  step="0.01"
-                  value={stall.selling_price}
-                  onChange={(e) =>
-                    updateStall(stall.id, {
-                      selling_price: parseFloat(e.target.value) || 0,
-                    })
-                  }
-                />
-                <Field
-                  label="Quantity"
-                  type="number"
-                  min={0}
-                  value={stall.quantity}
-                  onChange={(e) =>
-                    updateStall(stall.id, {
-                      quantity: parseInt(e.target.value, 10) || 0,
-                    })
-                  }
-                />
-              </div>
+              <StallProducts
+                stall={stall}
+                onUpdate={(patch) => updateStall(stall.id, patch)}
+              />
               <div className="mt-2">
                 <Field
                   label="Notes"

@@ -5,7 +5,7 @@ export const DEMO_EVENT_ID = "00000000-0000-4000-8000-000000000001";
 export const seedData: AppData = {
   event: {
     id: DEMO_EVENT_ID,
-    name: "St Mary's Family Fun Day",
+    name: "ZCCEW Family Fun Day",
     event_date: "2026-06-14",
     attendance_estimate: 350,
   },
@@ -17,6 +17,11 @@ export const seedData: AppData = {
       item_cost: 0.85,
       selling_price: 2.5,
       quantity: 120,
+      products: [
+        { id: "s1-p1", name: "Victoria Sponge slice", item_cost: 0.75, selling_price: 2.5, quantity: 50 },
+        { id: "s1-p2", name: "Chocolate Brownie", item_cost: 0.9, selling_price: 2.0, quantity: 40 },
+        { id: "s1-p3", name: "Cupcake", item_cost: 0.65, selling_price: 1.5, quantity: 30 },
+      ],
     },
     {
       id: "s2",
@@ -25,6 +30,11 @@ export const seedData: AppData = {
       item_cost: 1.9,
       selling_price: 4.5,
       quantity: 150,
+      products: [
+        { id: "s2-p1", name: "Beef burger", item_cost: 2.1, selling_price: 4.5, quantity: 90 },
+        { id: "s2-p2", name: "Hot dog", item_cost: 1.4, selling_price: 3.5, quantity: 40 },
+        { id: "s2-p3", name: "Veggie burger", item_cost: 1.8, selling_price: 4.0, quantity: 20 },
+      ],
     },
     {
       id: "s3",
@@ -33,6 +43,9 @@ export const seedData: AppData = {
       item_cost: 0.4,
       selling_price: 1.0,
       quantity: 200,
+      products: [
+        { id: "s3-p1", name: "Tombola ticket", item_cost: 0.4, selling_price: 1.0, quantity: 200 },
+      ],
     },
     {
       id: "s4",
@@ -41,6 +54,10 @@ export const seedData: AppData = {
       item_cost: 1.2,
       selling_price: 3.0,
       quantity: 80,
+      products: [
+        { id: "s4-p1", name: "Bracelet kit", item_cost: 1.0, selling_price: 2.5, quantity: 40 },
+        { id: "s4-p2", name: "Painting activity", item_cost: 1.5, selling_price: 3.5, quantity: 40 },
+      ],
     },
     {
       id: "s5",
@@ -49,6 +66,10 @@ export const seedData: AppData = {
       item_cost: 0.35,
       selling_price: 1.5,
       quantity: 250,
+      products: [
+        { id: "s5-p1", name: "Soft drink", item_cost: 0.35, selling_price: 1.5, quantity: 150 },
+        { id: "s5-p2", name: "Tea / coffee", item_cost: 0.2, selling_price: 1.0, quantity: 100 },
+      ],
     },
   ],
   expenses: [
