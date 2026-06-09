@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { BottomNav } from "./BottomNav";
 import { useEvent } from "@/lib/context/EventContext";
-import { Church, Settings } from "lucide-react";
+import { Settings } from "lucide-react";
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const { data, loading, usingSupabase, syncError } = useEvent();
@@ -12,8 +13,15 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     <div className="mx-auto min-h-dvh max-w-lg pb-24">
       <header className="sticky top-0 z-40 border-b border-[var(--color-border)]/80 bg-white/80 px-4 py-3 backdrop-blur-md">
         <div className="flex items-center gap-3">
-          <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-[var(--color-sage-dark)] to-[var(--color-sky-dark)] text-white shadow-md shadow-[var(--color-sage-dark)]/30">
-            <Church className="h-6 w-6" aria-hidden />
+          <div className="flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-white shadow-md ring-1 ring-[var(--color-border)]">
+            <Image
+              src="/icons/logo.png"
+              alt="ZCCEW logo"
+              width={44}
+              height={44}
+              className="h-full w-full object-cover"
+              priority
+            />
           </div>
           <div className="min-w-0 flex-1">
             <p className="truncate text-xs font-medium uppercase tracking-wide text-[var(--color-muted)]">
